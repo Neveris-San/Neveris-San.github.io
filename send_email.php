@@ -1,47 +1,31 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collecter les données du formulaire
     $date = $_POST['date'];
-	$nom = $_POST['nom'];
+    $nom_prenom = $_POST['nom_prenom'];
     $tournee = $_POST['tournee'];
-    $plaque = $_POST['plaque'];
+    $immatriculation = $_POST['immatriculation'];
     $carte_essence = $_POST['carte_essence'];
     $heures_sup = $_POST['heures_sup'];
-    $commentaire = $_POST['commentaire'];
+    $commentaires = $_POST['commentaires'];
 
-    // Adresse email de destination
-    $to = "severin.prebois@gmail.com";
-    
-    // Sujet de l'email
-    $subject = "Suivi quotidien de $nom";
-
-    // Contenu de l'email
+    $to = "destinataire@example.com"; // Remplacez par l'adresse e-mail du destinataire
+    $subject = "Formulaire de suivi quotidien - $date";
     $message = "
-    <html>
-    <head>
-        <title>Suivi quotidien</title>
-    </head>
-    <body>
-        <p><strong>Date :</strong> $date</p>
-		<p><strong>Nom :</strong> $nom</p>
-        <p><strong>Numéro de tournée :</strong> $tournee</p>
-        <p><strong>Plaque d'immatriculation :</strong> $plaque</p>
-        <p><strong>Carte essence prise aujourd'hui :</strong> $carte_essence</p>
-        <p><strong>Heures supplémentaires :</strong> $heures_sup</p>
-        <p><strong>Commentaire :</strong> $commentaire</p>
-    </body>
-    </html>
+        Date : $date\n
+        Nom et Prénom : $nom_prenom\n
+        Tournée : $tournee\n
+        Immatriculation du véhicule : $immatriculation\n
+        Carte essence prise : $carte_essence\n
+        Heures supplémentaires : $heures_sup\n
+        Commentaires : $commentaires
     ";
 
-    // En-têtes de l'email
-    $headers  = "MIME-Version: 1.0" . "\r\n";
-    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers = "From: suivi-quotidien@example.com"; // Remplacez par l'adresse e-mail d'envoi
 
-    // Envoi de l'email
     if (mail($to, $subject, $message, $headers)) {
         echo "Formulaire envoyé avec succès.";
     } else {
-        echo "Échec de l'envoi du formulaire.";
+        echo "Erreur lors de l'envoi du formulaire.";
     }
 }
 ?>
